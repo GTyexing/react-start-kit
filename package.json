@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --devtool eval --progress --hot --colors --content-base app --config webpack.config.dev.js",
-    "build": "NODE_ENV=production webpack -p --config webpack.config.prod.js"
+    "build": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "build-windows": "SET NODE_ENV=production & webpack -p --config webpack.config.prod.js"
   },
   "dependencies": {
     "babel-core": "^6.7.7",
