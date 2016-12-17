@@ -11,6 +11,7 @@ module.exports = {
     contentBase: './app',
     port: 8888
   },
+  devtool: 'eval',
   entry: [
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8888',
@@ -33,6 +34,11 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   plugins: [
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: Infinity,
+    //   filename: 'vendor.bundle.js'
+    // }),
     new webpack.HotModuleReplacementPlugin(),
     new OpenBrowserPlugin({ url: 'http://localhost:8888' })
   ]

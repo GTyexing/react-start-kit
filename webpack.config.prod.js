@@ -1,9 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
-var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-source-map',
   entry: [
     path.join(__dirname, 'app/main.js'),
   ],
@@ -25,15 +24,15 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin({
+    new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }}
     ),
-    new uglifyJsPlugin({
-      compress: {
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
         warnings: false
       }
-    }),
+    })
   ]
 };
