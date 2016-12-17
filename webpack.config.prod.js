@@ -1,22 +1,41 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-source-map',
-  entry: [
-    path.join(__dirname, 'app/main.js'),
-  ],
+  entry: {
+    vendor: [ 'react', 'react-dom', 'react-router', 'redux' ],
+    main: path.join(__dirname, 'app/main.js')
+  },
   output: {
     path: __dirname + '/build',
     publicPath: '/',
-    filename: './bundle.js'
+    filename: '[name].js'
   },
   module: {
-    loaders:[
-      { test: /\.js[x]?$/, loaders: ['babel'], include: path.join(__dirname, 'app'), exclude: /node_modules/ },
-      { test: /\.css$/, include: path.join(__dirname, 'app'), loader: 'style-loader!css-loader?modules' },
-      { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192' },
-      { test: /\.woff|\.woff2|\.svg|.eot|\.ttf/, loader: 'url?prefix=font/&limit=10000' }
+    loaders: [
+      { 
+        test: /\.js[x]?$/, 
+        loaders: ['babel'], 
+        include: path.join(__dirname, 'app'), 
+        exclude: /node_modules/ 
+      },
+      { 
+        test: /\.css$/, 
+        include: path.join(__dirname, 'app'), 
+        //wrong
+        // loader: ExtractTextPlugin.extract('style-loader!css-loader?modules')
+        loader: ExtractTextPlugin.extract( 'style-loader','css-loader?modules' )         
+      },
+      { 
+        test: /\.(png|jpg|gif)$/, 
+        loader: 'url-loader?limit=8192' 
+      },
+      { 
+        test: /\.woff|\.woff2|\.svg|.eot|\.ttf/, 
+        loader: 'url?prefix=font/&limit=10000' 
+      }
     ]
   },
   resolve: {
@@ -29,6 +48,8 @@ module.exports = {
         NODE_ENV: JSON.stringify('production')
       }}
     ),
+    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
+    new ExtractTextPlugin('bundle.css', { disable: false, allChunks: true }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false

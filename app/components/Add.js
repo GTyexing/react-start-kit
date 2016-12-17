@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './add.css'
 
 export default class Add extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class Add extends React.Component {
 
   render() {
     return (
-      <button onClick={this.props.add}>add</button>
+      <button className={style.add} onClick={this.props.add}>add</button>
     );
   }
 }

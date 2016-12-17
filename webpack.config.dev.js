@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devServer: {
@@ -20,26 +21,39 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     publicPath: '/',
-    filename: './bundle.js'
+    filename: '[chunkhash].[name].js'
   },
   module: {
-    loaders:[
-      { test: /\.js[x]?$/, loaders: ['babel'], include: path.join(__dirname, 'app'), exclude: /node_modules/ },
-      { test: /\.css$/, include: path.join(__dirname, 'app'), loader: 'style-loader!css-loader?modules' },
-      { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192' },
-      { test: /\.woff|\.woff2|\.svg|.eot|\.ttf/, loader: 'url?prefix=font/&limit=10000' }
+    loaders: [
+      { 
+        test: /\.js[x]?$/, 
+        loaders: ['babel'], 
+        include: path.join(__dirname, 'app'), 
+        exclude: /node_modules/ 
+      },
+      { 
+        test: /\.css$/, 
+        include: path.join(__dirname, 'app'), 
+        //wrong
+        // loader: ExtractTextPlugin.extract('style-loader!css-loader?modules')
+        loader: ExtractTextPlugin.extract( 'style-loader','css-loader?modules' )        
+      },
+      { 
+        test: /\.(png|jpg|gif)$/, 
+        loader: 'url-loader?limit=8192' 
+      },
+      { 
+        test: /\.woff|\.woff2|\.svg|.eot|\.ttf/, 
+        loader: 'url?prefix=font/&limit=10000' 
+      }
     ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: Infinity,
-    //   filename: 'vendor.bundle.js'
-    // }),
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('bundle.css', { disable: false, allChunks: true }),
     new OpenBrowserPlugin({ url: 'http://localhost:8888' })
   ]
 }

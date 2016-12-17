@@ -5,7 +5,7 @@
   "main": "app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --devtool eval --progress --hot --colors --content-base app --config webpack.config.dev.js",
+    "start": "webpack-dev-server --devtool eval --progress --hot --content-base app --config webpack.config.dev.js",
     "build": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
     "build-windows": "SET NODE_ENV=production & webpack -p --config webpack.config.prod.js"
   },
@@ -55,5 +55,8 @@
   "bugs": {
     "url": "https://github.com/GTyexing/wisdom-classroom/issues"
   },
-  "homepage": "https://github.com/GTyexing/wisdom-classroom#readme"
+  "homepage": "https://github.com/GTyexing/wisdom-classroom#readme",
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^1.0.1"
+  }
 }
