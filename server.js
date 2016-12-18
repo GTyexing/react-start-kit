@@ -7,11 +7,11 @@ let app = express();
 app.use(compression());
 
 // serve our static stuff like build.js
-app.use('/static', express.static(path.join(__dirname, 'build')));
+app.use('/', express.static(path.join(__dirname, 'build')));
 
 // send all requests to index.html so browserHistory works
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'))
+  res.sendFile(path.join(__dirname, 'build/index.html'))
 });
 
 let PORT = process.env.PORT || 8888;

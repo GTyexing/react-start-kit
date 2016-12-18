@@ -16,12 +16,13 @@ module.exports = {
   entry: [
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8888',
-    path.join(__dirname, 'app/main.js')
+    path.join(__dirname, 'app/main.js'),
   ],
   output: {
     path: __dirname + '/build',
-    publicPath: '/',
-    filename: '[chunkhash].[name].js'
+    chunkFilename: '[name].chunk.js',
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [

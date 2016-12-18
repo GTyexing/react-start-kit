@@ -1,17 +1,19 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-source-map',
   entry: {
     vendor: [ 'react', 'react-dom', 'react-router', 'redux' ],
-    main: path.join(__dirname, 'app/main.js')
+    main: path.join(__dirname, 'app/main.js'),
   },
   output: {
     path: __dirname + '/build',
-    publicPath: '/',
-    filename: '[name].js'
+    chunkFilename: '[name].chunk.js',
+    filename: '[name].[chunkhash].js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -49,11 +51,13 @@ module.exports = {
       }}
     ),
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
+    new webpack.optimize.DedupePlugin(),
     new ExtractTextPlugin('bundle.css', { disable: false, allChunks: true }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
       }
-    })
+    }),
+    new HtmlWebpackPlugin({title: 'wisdom-classroom'})
   ]
 };

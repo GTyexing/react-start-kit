@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --devtool eval --progress --hot --content-base app --config webpack.config.dev.js",
-    "build": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
-    "build-windows": "SET NODE_ENV=production & webpack -p --config webpack.config.prod.js"
+    "build": "rimraf build && NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "build-windows": "rimraf build && SET NODE_ENV=production & webpack -p --config webpack.config.prod.js"
   },
   "dependencies": {
     "babel-core": "^6.7.7",
@@ -38,6 +38,7 @@
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.3",
     "redux": "^3.5.2",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
@@ -57,6 +58,7 @@
   },
   "homepage": "https://github.com/GTyexing/wisdom-classroom#readme",
   "devDependencies": {
-    "extract-text-webpack-plugin": "^1.0.1"
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.24.1"
   }
 }

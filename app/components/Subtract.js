@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Subtract extends React.Component {
+class Subtract extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -11,3 +11,5 @@ export default class Subtract extends React.Component {
     );
   }
 }
+
+module.exports = Subtract;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Mult extends React.Component {
+class Mult extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -11,3 +11,5 @@ export default class Mult extends React.Component {
     );
   }
 }
+
+module.exports = Mult;
