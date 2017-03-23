@@ -18,7 +18,9 @@ class App extends React.Component {
     return (
       <div className = {style.container}>
         <Link to="/">add</Link>
+        <br />
         <Link to="/subtract">subtract</Link>
+        <br />
         <Link to="/mult">mult</Link>
         <div>
           {React.cloneElement(this.props.children, this.props)}

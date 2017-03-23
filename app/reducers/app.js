@@ -1,5 +1,5 @@
-import { ADD, SUBTRACT } from '../actions/actionApp';
-import { MULT } from '../actions/actions'
+// import { ADD, SUBTRACT } from '../actions/actionApp';
+// import { MULT } from '../actions/actions'
 
 const app = (state = 0, action) => {
   switch (action.type) {

@@ -8,16 +8,11 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     inline: true,
-    progress: true,
     contentBase: './app',
     port: 8888
   },
   devtool: 'eval',
-  entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8888',
-    path.join(__dirname, 'app/main.js'),
-  ],
+  entry: path.join(__dirname, 'app/main.js'),   
   output: {
     path: __dirname + '/build',
     chunkFilename: '[name].chunk.js',
@@ -25,36 +20,38 @@ module.exports = {
     publicPath: '/'
   },
   module: {
-    loaders: [
-      { 
-        test: /\.js[x]?$/, 
-        loaders: ['babel'], 
-        include: path.join(__dirname, 'app'), 
-        exclude: /node_modules/ 
-      },
-      { 
-        test: /\.css$/, 
-        include: path.join(__dirname, 'app'), 
-        //wrong
-        // loader: ExtractTextPlugin.extract('style-loader!css-loader?modules')
-        loader: ExtractTextPlugin.extract( 'style-loader','css-loader?modules' )        
+    rules: [
+	    {
+	    	test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: {loader: "css-loader", options: { modules: true }}
+        })
+	    },
+	    { 
+	      test: /\.js$/,
+	      exclude: /(node_modules|bower_components)/,
+	      loader: 'babel-loader',
+	      query: {
+	        presets: ['es2015']
+	      }
       },
       { 
         test: /\.(png|jpg|gif)$/, 
-        loader: 'url-loader?limit=8192' 
+        use: { loader: 'url-loader', options: { limit: 100000 }}, 
       },
       { 
         test: /\.woff|\.woff2|\.svg|.eot|\.ttf/, 
-        loader: 'url?prefix=font/&limit=10000' 
+        use: { loader: 'url-loader', options: { limit: 100000, prefix: 'fonts' }}, 
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('bundle.css', { disable: false, allChunks: true }),
+    new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true }),
     new OpenBrowserPlugin({ url: 'http://localhost:8888' })
   ]
 }

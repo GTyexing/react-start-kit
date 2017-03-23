@@ -1,13 +1,11 @@
 {
-  "name": "wisdom-classroom",
+  "name": "frontend",
   "version": "0.0.1",
-  "description": "Help teacher build testpaper, let student do testpaper, of course both online",
   "main": "app/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --devtool eval --progress --hot --content-base app --config webpack.config.dev.js",
-    "build": "rimraf build && NODE_ENV=production webpack -p --config webpack.config.prod.js",
-    "build-windows": "rimraf build && SET NODE_ENV=production & webpack -p --config webpack.config.prod.js"
+    "start": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "rimraf build && NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build-windows": "rimraf build && SET NODE_ENV=production & webpack --config webpack.config.prod.js"
   },
   "dependencies": {
     "babel-core": "^6.7.7",
@@ -40,25 +38,21 @@
     "redux": "^3.5.2",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GTyexing/wisdom-classroom.git"
+    "url-loader": "^0.5.7"
   },
   "keywords": [
     "react"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GTyexing/react-start-kit"
+  },
   "author": "Wuhan",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/GTyexing/wisdom-classroom/issues"
-  },
-  "homepage": "https://github.com/GTyexing/wisdom-classroom#readme",
   "devDependencies": {
-    "extract-text-webpack-plugin": "^1.0.1",
-    "html-webpack-plugin": "^2.24.1"
+    "extract-text-webpack-plugin": "^2.0.0",
+    "html-webpack-plugin": "^2.24.1",
+    "webpack": "^2.3.1",
+    "webpack-dev-server": "^2.4.2"
   }
 }

@@ -16,48 +16,49 @@ module.exports = {
     publicPath: '/'
   },
   module: {
-    loaders: [
-      { 
-        test: /\.js[x]?$/, 
-        loaders: ['babel'], 
-        include: path.join(__dirname, 'app'), 
-        exclude: /node_modules/ 
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: {loader: "css-loader", options: { modules: true }}
+        })
       },
       { 
-        test: /\.css$/, 
-        include: path.join(__dirname, 'app'), 
-        //wrong
-        // loader: ExtractTextPlugin.extract('style-loader!css-loader?modules')
-        loader: ExtractTextPlugin.extract( 'style-loader','css-loader?modules' )         
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
       },
       { 
         test: /\.(png|jpg|gif)$/, 
-        loader: 'url-loader?limit=8192' 
+        use: { loader: 'url-loader', options: { limit: 100000 }}, 
       },
       { 
         test: /\.woff|\.woff2|\.svg|.eot|\.ttf/, 
-        loader: 'url?prefix=font/&limit=10000' 
+        use: { loader: 'url-loader', options: { limit: 100000, prefix: 'fonts' }}, 
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }}
     ),
-    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
-    new webpack.optimize.DedupePlugin(),
-    new ExtractTextPlugin('bundle.css', { disable: false, allChunks: true }),
+    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'] }),
+    new ExtractTextPlugin({filename: 'bundle.css', disable: false, allChunks: true}),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
       }
     }),
-    new HtmlWebpackPlugin({title: 'wisdom-classroom'})
+    new HtmlWebpackPlugin({title: 'react-start-kit'})
   ]
 };
