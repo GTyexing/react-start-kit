@@ -8,12 +8,12 @@
     "build-windows": "rimraf build && SET NODE_ENV=production & webpack --config webpack.config.prod.js"
   },
   "dependencies": {
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-redux": "^5.0.0",
-    "react-router": "^3.0.0",
-    "react-router-redux": "^4.0.4",
-    "redux": "^3.5.2"
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.0.0",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0"
   },
   "keywords": [
     "react"

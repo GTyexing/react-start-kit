@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'cheap-source-map',
   entry: {
-    vendor: [ 'react', 'react-dom', 'react-router', 'redux' ],
+    vendor: [ 'react', 'react-dom', 'react-router', 'redux', 'react-redux', 'react-router-redux' ],
     main: path.join(__dirname, 'app/main.js'),
   },
   output: {
@@ -46,7 +46,6 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
@@ -57,7 +56,8 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
-      }
+      },
+      sourceMap: true
     }),
     new HtmlWebpackPlugin({title: 'react-start-kit'})
   ]
