@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import style from './add.css'
 
 class Add extends React.Component {
@@ -13,4 +13,4 @@ class Add extends React.Component {
   }
 }
 
-module.exports = Add;
+export default Add;

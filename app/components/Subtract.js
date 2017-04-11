@@ -12,4 +12,4 @@ class Subtract extends React.Component {
   }
 }
 
-module.exports = Subtract;
+export default Subtract;

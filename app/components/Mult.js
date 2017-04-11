@@ -12,4 +12,4 @@ class Mult extends React.Component {
   }
 }
 
-module.exports = Mult;
+export default Mult;
