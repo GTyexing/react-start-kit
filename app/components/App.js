@@ -17,7 +17,7 @@ class App extends React.Component {
     const { app } = this.props;
     return (
       <div className = {style.container}>
-        <Link to="/">add</Link>
+        <Link to="/">addd</Link>
         <br />
         <Link to="/subtract">subtract</Link>
         <br />
